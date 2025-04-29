@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestion Saisons et Fruits</title>
+</head>
+<body>
+    <h1>Ajouter une saison</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ saison_form.as_p }}
+        <button type="submit">Ajouter la saison</button>
+    </form>
+
+    <h1>Ajouter un fruit</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ fruit_form.as_p }}
+        <button type="submit">Ajouter le fruit</button>
+    </form>
+
+    <h2>Liste des saisons existantes</h2>
+    <ul>
+        {% for saison in saisons %}
+            <li>
+                {{ saison.nom }} ({{ saison.date_debut }} - {{ saison.date_fin }})
+                <form action="{% url 'supprimer_saison' saison.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Supprimer</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Liste des fruits existants</h2>
+    <ul>
+        {% for fruit in fruits %}
+            <li>
+                {{ fruit.nom }} ({{ fruit.saison.nom }})
+                <form action="{% url 'supprimer_fruit' fruit.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Supprimer</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'afficher_saisons' %}">Affichage</a>
+</body>
+</html>
