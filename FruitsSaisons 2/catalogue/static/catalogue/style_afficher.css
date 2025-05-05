@@ -1,0 +1,33 @@
+body {
+    background-color: #e3e3e3;
+}
+
+h1 {
+    text-align: center;
+    color: #000000;
+}
+
+h2 {
+    text-align: center;
+    color: #000000;
+}
+
+.container {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.form-section {
+    width: 80%;
+    margin: 1px 10% 1px 10%;
+    box-shadow: 2px 2px 8px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+ul {
+    list-style-type: none;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Affichage Saisons et Fruits</title>
+    <link rel="stylesheet" href="{% static 'catalogue/style_afficher.css' %}">
+</head>
+<body>
+    <h1>Saisons et leurs fruits</h1>
+    {% for saison in saisons %}
+    <div class="container">
+        <div class="form-section">
+            <h2>{{ saison.nom }} ({{ saison.date_debut }} - {{ saison.date_fin }})</h2>
+            <ul>
+                {% for fruit in saison.fruits.all %}
+                    <li>
+                        {{ fruit.nom }}<br>
+                    </li>
+                {% empty %}
+                    <li>Aucun fruit pour cette saison.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+    <a href="{% url 'gestion_saisons' %}">Retour à la gestion</a>
+</body>
+</html>

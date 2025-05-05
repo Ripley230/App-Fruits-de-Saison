@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Gestion Saisons et Fruits</title>
+    <link rel="stylesheet" href="{% static 'catalogue/style_gestion.css' %}">
+</head>
+<body>
+    <h1>Gestion des saisons et des fruits</h1>
+    <div class="container">
+        <div class="form-section">
+            <h2>Ajouter une saison</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ saison_form.as_p }}
+                <button type="submit" name="add_saison" class="ajout">Ajouter la saison</button>
+            </form>
+        </div>
+        <div class="form-section">
+            <h2>Ajouter un fruit</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ fruit_form.as_p }}
+                <button type="submit" name="add_fruit" class="ajout">Ajouter le fruit</button>
+            </form>
+        </div>
+    </div>
+
+    <h2>Liste des saisons existantes</h2>
+    <ul>
+        {% for saison in saisons %}
+            <li>
+                {{ saison.nom }} ({{ saison.date_debut }} - {{ saison.date_fin }})
+                <form action="{% url 'supprimer_saison' saison.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="supp">Supprimer</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Liste des fruits existants</h2>
+    <ul>
+        {% for fruit in fruits %}
+            <li>
+                {{ fruit.nom }} ({{ fruit.saison.nom }})
+                <form action="{% url 'supprimer_fruit' fruit.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="supp">Supprimer</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'afficher_saisons' %}">Affichage</a>
+</body>
+</html>
